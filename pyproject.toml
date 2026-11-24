@@ -1,0 +1,62 @@
+[build-system]
+requires = ["hatchling>=1.25.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "receipt-guard"
+version = "0.1.0"
+description = "Deterministic OCR post-processor for thermal receipts, invoices & agro-waybills: exact Decimal cross-footing arithmetic verification, OCR digit-confusion repair (O/0, l/1, S/5, B/8), and human-review routing."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [
+    { name = "Akandwanaho Ivan Alvin", email = "codesphereinnovationz@gmail.com" },
+]
+keywords = [
+    "ocr",
+    "receipts",
+    "invoices",
+    "document-ai",
+    "fintech",
+    "accounting",
+    "verification",
+    "microfinance",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
+    "ruff>=0.8.0",
+    "mypy>=1.11.0",
+]
+
+[project.scripts]
+receipt-guard = "receipt_guard.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/codesphere-u/receipt-guard"
+Repository = "https://github.com/codesphere-u/receipt-guard"
+Issues = "https://github.com/codesphere-u/receipt-guard/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/receipt_guard"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+mypy_path = "src"
+packages = ["receipt_guard"]
